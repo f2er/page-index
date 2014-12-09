@@ -289,7 +289,7 @@
 		},
 		init : function(){
 			var that = this;
-			that.doDynamicStyle('http://localhost:3000/fecheck.css');
+			that.doDynamicStyle('http://pi.4399ued.com/fecheck.css');
 			that.getMeta();
 			that.getImgAlt();
 			that.getPerformanceTime();
