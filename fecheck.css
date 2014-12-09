@@ -1,0 +1,65 @@
+@charset "utf-8";
+
+.m_fecheck{ 
+	margin:0;line-height: 2;font-size: 12px;
+	padding:10px;
+	position: fixed;
+	width:958px;
+	height:400px;
+	background: #fff;
+	border:1px solid #f00;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	left:50%;
+	bottom:0;
+	margin-left:-490px;
+	z-index: 9999;
+	overflow-y:scroll; 
+}
+.m_fecheck li{
+	margin-bottom:5px;
+}
+.m_fecheck .m-feclose{
+	position: absolute;
+	right:10px;
+	top:10px;
+	cursor: pointer;
+}
+.m_fecheck_title{
+	font-weight:14px;
+	font-weight: 700;
+}
+.m_fecheck_tip{
+	color:#999;
+	margin-left:10px;
+} 
+.j-outline{
+	outline:1px solid #f00;
+}
+.m_fecheck .m_fec_title{
+	font-weight: 700;
+	color:#F40;
+}
+.m_fecheck .m_fb{
+	position: absolute;
+	top:10px;
+	right:60px;
+	color:#F40;
+}
+.m_fecheck .m_fe_table{
+	width:780;
+}
+.m_fecheck .m_fe_table table{
+	width:100%;
+}
+.m_fecheck .m_fe_table th{
+	width:280px;
+	padding-left:20px;
+}
+.m_fecheck .m_fe_table td,.m_fecheck .m_fe_table th
+{
+	border:1px solid #999;
+	height:28px;
+	line-height: 28px;
+	text-align:center;
+}
