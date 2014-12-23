@@ -247,7 +247,7 @@
 									<li><span class="m_fec_title">页面被重定向的次数：</span>'+data.pageRedirectNum+'</li>\
 									<li><span class="m_fec_title">页面通过以下方式被打开：</span>'+data.pageMethodType+'</li>\
 									<li><span class="m_fec_title">页面性能相关(chrome专属)</span>'+ data.chromeData+'</li>\
-									<li><span class="m_fec_title">图片尺寸使用情况</span>'+ _imgwhTemplate.join('')+'</li>\
+									<li><span class="m_fec_title">本页面图片尺寸不符合情况：</span>'+ _imgwhTemplate.join('')+'</li>\
 								</ul>\
 								<span class="m-feclose" id="j-fecheck-close">关闭</span>\
 								<span class="m_fb" id="j-fabu"></span>';
