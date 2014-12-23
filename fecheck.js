@@ -222,7 +222,7 @@
 				var _imgwhTemplate = [];
 				_imgwhTemplate.push('<div class="m_fe_table"><table><tr><th>路径</th><th>图片大小（宽，高）</th><th>原始大小（宽，高）</th><tr>');
 				for( var g in data.imgNatural){
-					_imgwhTemplate.push("<tr><td>"+data.imgNatural[g].getAttribute('src')+"</td><td>"+data.imgNatural[g].width+"，"+data.imgNatural[g].height+"</td><td>"+data.imgNatural[g].naturalWidth+"，"+data.imgNatural[g].naturalHeight+"</td></tr>");
+					_imgwhTemplate.push("<tr><td><a href='"+data.imgNatural[g].getAttribute('src')+"' target='_blank'/>点击查看</a></td><td>"+data.imgNatural[g].width+"，"+data.imgNatural[g].height+"</td><td>"+data.imgNatural[g].naturalWidth+"，"+data.imgNatural[g].naturalHeight+"</td></tr>");
 				}
 			
 				_imgwhTemplate.push('</table></div>');
@@ -315,7 +315,7 @@
 		},
 		init : function(){
 			var that = this;
-			that.doDynamicStyle('http://localhost:3000/fecheck.css');
+			that.doDynamicStyle('http://pi.4399ued.com/fecheck.css');
 			that.getMeta();
 			that.getImgAlt();
 			that.getPerformanceTime();
