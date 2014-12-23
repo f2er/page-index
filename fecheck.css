@@ -5,7 +5,7 @@
 	padding:10px;
 	position: fixed;
 	width:958px;
-	height:400px;
+	height:600px;
 	background: #fff;
 	border:1px solid #f00;
 	border-top-left-radius: 5px;
@@ -47,7 +47,7 @@
 	color:#F40;
 }
 .m_fecheck .m_fe_table{
-	width:780;
+	width:940px;
 }
 .m_fecheck .m_fe_table table{
 	width:100%;
@@ -58,7 +58,7 @@
 }
 .m_fecheck .m_fe_table td,.m_fecheck .m_fe_table th
 {
-	border:1px solid #999;
+	border:1px solid #ddd;
 	height:28px;
 	line-height: 28px;
 	text-align:center;

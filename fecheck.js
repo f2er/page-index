@@ -34,7 +34,34 @@
 			that.data['totalImage'] = _imgAlt.length;
 			that.data['imageAlt'] = _altArray.length;
     	},
-    	
+    	getImgNaturalDimensions:function(){
+    		var that = this,
+    			_imgArray = [],
+    			elemetnArray = [];
+    		var _imgWH = document.getElementsByTagName('img');
+    		for( var i=0,len=_imgWH.length;i<len;i++){
+    			_imgArray.push(_imgWH[i]);
+    		}
+
+    		_imgArray.forEach(getNaturalWH);
+    		//异步或延迟的
+    		function dynicImgwh(elementSrc,callback){
+    			var nImgArray = [];
+    			var image = new Image();
+    			image.src = elementSrc;
+    			image.onload = function(){
+    				callback(image.width,image.height);
+    			}
+				
+    		}
+    		function getNaturalWH(element, index){
+    			if(element.width != element.naturalWidth || element.height != element.naturalHeight){
+    				elemetnArray.push(element);
+    				//console.log(element.getAttribute('src'),element.width,element.naturalWidth)
+    			}
+    		}
+    		that.data['imgNatural']= elemetnArray;
+    	},
     	getPageRedirect : function(){
     		var that = this;
     		var _pageMethod = ['用户通过连接或在地址栏中输入URL的方式打开页面',
@@ -89,17 +116,6 @@
 			_speedHtml.push('</table></div>');
 			that.data['speedRender'] = _speedHtml.join('');
 			
-			/*console.log('准备新页面时间耗时: ' + readyStart);
-			console.log('redirect 重定向耗时: ' + redirectTime);
-			console.log('Appcache 耗时: ' + appcacheTime);
-			console.log('unload 前文档耗时: ' + unloadEventTime);
-			console.log('DNS 查询耗时: ' + lookupDomainTime);
-			console.log('TCP连接耗时: ' + connectTime);
-			console.log('request请求耗时: ' + requestTime);
-			console.log('请求完毕至DOM加载: ' + initDomTreeTime);
-			console.log('解释dom树耗时: ' + domReadyTime);
-			console.log('load事件耗时: ' + loadEventTime);
-			console.log('从开始至load总耗时: ' + loadTime);*/
 		},
 		getJsMemory : function(){
 			var that = this;
@@ -199,14 +215,23 @@
 				};
 				['jsHeapSizeLimit','usedJSHeapSize','totalJSHeapSize'].forEach(getMemoryHtml);
 				function getMemoryHtml(i,v){
-					_memoryHtml+='<p>'+_nounExplan[i]+'：'+data[i]/1024+'M</p>'
+					_memoryHtml+='<p>'+_nounExplan[i]+'：'+data[i]/1024+'M</p>';
 				}
 				
+				//本页面图片尺寸是否合适
+				var _imgwhTemplate = [];
+				_imgwhTemplate.push('<div class="m_fe_table"><table><tr><th>路径</th><th>图片大小（宽，高）</th><th>原始大小（宽，高）</th><tr>');
+				for( var g in data.imgNatural){
+					_imgwhTemplate.push("<tr><td>"+data.imgNatural[g].getAttribute('src')+"</td><td>"+data.imgNatural[g].width+"，"+data.imgNatural[g].height+"</td><td>"+data.imgNatural[g].naturalWidth+"，"+data.imgNatural[g].naturalHeight+"</td></tr>");
+				}
+			
+				_imgwhTemplate.push('</table></div>');
+				
 
-			var _element = document.createElement('div');
-			_element.id = "j-checkResult";
-			_element.className = "m_fecheck";
-			_element.innerHTML = '<p class="m_fecheck_title">'+_location+'的基本信息：</p>\
+				var _element = document.createElement('div');
+				_element.id = "j-checkResult";
+				_element.className = "m_fecheck";
+				_element.innerHTML = '<p class="m_fecheck_title">'+_location+'的基本信息：</p>\
 								  <ul>\
 								    <li><span class="m_fec_title">title：</span>'+ _title +'</li>\
 									<li><span class="m_fec_title">keyword：</span>'+ _keywords +'</li>\
@@ -222,6 +247,7 @@
 									<li><span class="m_fec_title">页面被重定向的次数：</span>'+data.pageRedirectNum+'</li>\
 									<li><span class="m_fec_title">页面通过以下方式被打开：</span>'+data.pageMethodType+'</li>\
 									<li><span class="m_fec_title">页面性能相关(chrome专属)</span>'+ data.chromeData+'</li>\
+									<li><span class="m_fec_title">图片尺寸使用情况</span>'+ _imgwhTemplate.join('')+'</li>\
 								</ul>\
 								<span class="m-feclose" id="j-fecheck-close">关闭</span>\
 								<span class="m_fb" id="j-fabu"></span>';
@@ -289,7 +315,7 @@
 		},
 		init : function(){
 			var that = this;
-			that.doDynamicStyle('http://pi.4399ued.com/fecheck.css');
+			that.doDynamicStyle('http://localhost:3000/fecheck.css');
 			that.getMeta();
 			that.getImgAlt();
 			that.getPerformanceTime();
@@ -298,6 +324,7 @@
 			that.getCssJsNum();
 			that.getPageRedirect();
 			that.getChromeLoadTime();
+			that.getImgNaturalDimensions();
 			that.getResult( that.data )
 		}
     }
