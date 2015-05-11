@@ -173,6 +173,21 @@
 			
 
 		},
+		checkMobile:function(){
+			var that = this;
+			//检测a标签是否有title属性
+			var _aArrayTemp = [];
+			var _aArray = document.getElementsByTagName('a');
+			for( var i=0,len = _aArray.length;i<len;i++){
+				if(_aArray[i].getAttribute('title')){
+					_aArrayTemp.push(_aArray[i]);
+					_aArray[i].className = "j-aoutline";
+				}
+			}
+			that.data['docA'] = _aArray.length;
+			that.data['Atitle']=_aArrayTemp.length;
+			
+		},
 		getResult : function(data){
 			var that = this;
 			if( document.getElementById('j-checkResult')){
@@ -192,7 +207,9 @@
 				_totaldomNum = data.totalDomNum,
 				_totalcssLinkNum = data.totalCssLinkNum.length,
 				_totalScriptNum = data.totalScriptNum.length,
-				_tongji = data.baidutj ? data.baidutj : "未添加";
+				_tongji = data.baidutj ? data.baidutj : "未添加",
+				_docANum = data.docA,
+				_mobileAtitle = data.Atitle;
 
 				//css外链清单
 				var _cssHtml = "";
@@ -238,6 +255,7 @@
 									<li><span class="m_fec_title">keyword：</span>'+ _keywords +'</li>\
 									<li><span class="m_fec_title">description：</span>'+ _description +'</li>\
 									<li><span class="m_fec_title">总共有图片：</span>'+ _imgTotalNum +'，其中有alt属性的有：'+ _imgTotalAlt +'<span class="m_fecheck_tip">其中无alt的会标示出来</span></li>\
+									<li><span class="m_fec_title">A标签：</span>'+ _docANum +'，其中有title属性的有：'+ _mobileAtitle +'<span class="m_fecheck_tip">其中有title的会标示出来</span></li>\
 									<li><span class="m_fec_title">shortcut icon图标：</span>'+ _shortCutIcon +'</li>\
 									<li><span class="m_fec_title">百度统计：</span>'+_tongji+'</li>\
 									<li><span class="m_fec_title">网页速度相关(ms,异步的话等加载完)：</span>'+data.speedRender+'</li>\
@@ -326,6 +344,7 @@
 			that.getPageRedirect();
 			that.getChromeLoadTime();
 			that.getImgNaturalDimensions();
+			that.checkMobile();
 			that.getResult( that.data )
 		}
     }

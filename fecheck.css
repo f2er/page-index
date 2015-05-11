@@ -36,6 +36,9 @@
 .j-outline{
 	outline:1px solid #f00;
 }
+.j-aoutline{
+	outline:1px solid #54b52c;
+}
 .m_fecheck .m_fec_title{
 	font-weight: 700;
 	color:#F40;
